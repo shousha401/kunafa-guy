@@ -41,6 +41,7 @@ export function FlagStripe({ width = 72, className = '' }: FlagStripeProps) {
           height,
           backgroundImage: FLAG_URL,
           backgroundSize: `${width}px ${height}px`,
+          backgroundRepeat: 'no-repeat',
           borderRadius: 2,
         }}
       />
@@ -63,7 +64,10 @@ export function FlagStripe({ width = 72, className = '' }: FlagStripeProps) {
               height,
               backgroundImage: FLAG_URL,
               backgroundSize: `${width}px ${height}px`,
-              backgroundPosition: `${-i * sliceW}px 0`,
+              backgroundRepeat: 'no-repeat',
+              // overlapped slices start OVERLAP px further left, so the
+              // texture offset must shift with them to stay aligned
+              backgroundPosition: `${-(i * sliceW) + (i === 0 ? 0 : OVERLAP)}px 0`,
               marginLeft: i === 0 ? 0 : -OVERLAP,
               animationDelay: `${-i * 0.12}s`,
             }}
