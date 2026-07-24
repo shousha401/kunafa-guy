@@ -36,6 +36,16 @@ manifest (e.g. `menu-kunafa-classic.jpg`, 4:3, ~1200×900, JPG ≤120KB). Done �
 If an item has no photo yet, set its `image` to an empty string (`image: ''`) and the
 card renders a branded "photo coming soon" tile instead of a broken image.
 
+Photos usually need cropping and compressing first. `scripts/process-photos.ps1` does
+both — it crops to the slot's aspect ratio and steps quality down until the file meets
+its weight budget:
+
+```bash
+powershell -File scripts/process-photos.ps1 -Source "C:\path\to\photo.jpg" -Slot menu-shawarma
+```
+
+Run it with no arguments to rebuild every slot from the currently mapped source photos.
+
 ### Photo status (as of this build)
 
 | Slot | Source | Still needed |
