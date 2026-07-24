@@ -35,11 +35,52 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
+  /* 3D waving flag (FlagStripe) — slices ripple with staggered phase */
+  .flag-wave {
+    display: inline-flex;
+    perspective: 200px;
+    animation: flag-sway 6s ease-in-out infinite;
+  }
+  .flag-slice {
+    display: inline-block;
+    transform-origin: left center;
+    animation: flag-ripple 2.2s ease-in-out infinite;
+  }
+
   /* Ghost Arabic accent word (كنافة) — outline only */
   .arabic-ghost {
     -webkit-text-stroke: 1.5px #d97a2b;
     color: transparent;
     opacity: 0.35;
+  }
+}
+
+/* Traveling wave across the flag slices — reads as rippling cloth */
+@keyframes flag-ripple {
+  0%,
+  50%,
+  100% {
+    transform: rotateY(0deg) translateZ(0);
+    filter: brightness(1);
+  }
+  25% {
+    transform: rotateY(12deg) translateZ(4px);
+    filter: brightness(1.14);
+  }
+  75% {
+    transform: rotateY(-12deg) translateZ(-4px);
+    filter: brightness(0.86);
+  }
+}
+
+/* Slow whole-flag sway in perspective */
+@keyframes flag-sway {
+  0%,
+  100% {
+    transform: rotateY(-10deg) rotateX(4deg);
+  }
+  50% {
+    transform: rotateY(14deg) rotateX(-3deg);
   }
 }
 
