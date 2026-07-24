@@ -193,7 +193,9 @@ export const site: SiteConfig = {
       description: 'Marinated, stacked, shaved hot off the spit.', // UNCONFIRMED — get owner's words
       price: null,
       category: 'shawarma',
-      image: '/images/menu-shawarma.jpg',
+      // No photo yet — empty string renders the branded "photo coming soon" tile.
+      // Drop a shot at /images/menu-shawarma.jpg and put the path back here.
+      image: '',
       imageAlt: 'Wrapped shawarma sandwich, cut to show the filling',
       status: 'UNCONFIRMED',
     },

@@ -33,7 +33,20 @@ and write real `imageAlt` text. The menu section renders it automatically.
 Drop the new photo into `public/images/` using the exact filename from the asset
 manifest (e.g. `menu-kunafa-classic.jpg`, 4:3, ~1200×900, JPG ≤120KB). Done — no code changes.
 
-Current placeholder images are auto-generated stand-ins; replace all of them before launch.
+If an item has no photo yet, set its `image` to an empty string (`image: ''`) and the
+card renders a branded "photo coming soon" tile instead of a broken image.
+
+### Photo status (as of this build)
+
+| Slot | Source | Still needed |
+|---|---|---|
+| Hero, menu kunafa, all 4 process steps | crops of one supplied kunafa photo (736×1103) | Arafat's own kunafa shots; the process steps currently show the finished tray, not the actual shred/sear/pull/drench stages |
+| Both burger cards | one supplied "double smash" photo (236×314) | a higher-resolution original — this one is a thumbnail and looks soft when enlarged; also a genuine single-patty shot for the Smash Burger card |
+| Shawarma | none | any shawarma photo |
+
+**Licensing:** the supplied kunafa photo looks like professional stock/editorial
+photography. Confirm it's licensed for commercial use — or replace it with Arafat's
+own shot — before this site goes public.
 
 ### Hours
 Hours are intentionally NOT listed — they vary daily. The site sends people to Instagram.

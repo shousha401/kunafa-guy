@@ -23,12 +23,29 @@ function MenuCard({ item }: { item: MenuItem }) {
       }`}
     >
       <div className={`overflow-hidden ${item.featured ? 'aspect-[16/9] md:aspect-[2/1]' : 'aspect-[4/3]'} bg-griddle-800`}>
-        <img
-          src={item.image}
-          alt={item.imageAlt}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-[600ms] ease-griddle motion-safe:hover:scale-105"
-        />
+        {item.image ? (
+          <img
+            src={item.image}
+            alt={item.imageAlt}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-[600ms] ease-griddle motion-safe:hover:scale-105"
+          />
+        ) : (
+          // No photo supplied yet — branded tile rather than a fake image
+          <div className="texture-noise flex h-full w-full flex-col items-center justify-center gap-2 bg-griddle-800 px-4 text-center">
+            <span
+              dir="rtl"
+              lang="ar"
+              aria-hidden="true"
+              className="font-arabic text-3xl text-kunafa-500/70"
+            >
+              كنافة
+            </span>
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-cream-100/60">
+              Photo coming soon
+            </span>
+          </div>
+        )}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-5">
         <div className="flex items-baseline justify-between gap-3">
