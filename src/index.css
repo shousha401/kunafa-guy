@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-griddle-900 font-body text-cream-50 antialiased;
+  }
+
+  ::selection {
+    @apply bg-kunafa-500 text-griddle-950;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-pistachio-300 ring-offset-2 ring-offset-griddle-900;
+  }
+}
+
+@layer utilities {
+  /* Subtle heat/grain noise for dark sections — inline SVG tile, zero network cost */
+  .texture-noise {
+    position: relative;
+  }
+  .texture-noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Ghost Arabic accent word (كنافة) — outline only */
+  .arabic-ghost {
+    -webkit-text-stroke: 1.5px #d97a2b;
+    color: transparent;
+    opacity: 0.35;
+  }
+}
+
+/* Global reduced-motion fallback — hooks gate JS motion, this kills the rest */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
