@@ -91,7 +91,7 @@ export function SocialProof({ social, reviews, claims }: SocialProofProps) {
               “{claims.votedBest}”
             </p>
             <footer className="mt-3 text-sm uppercase tracking-[0.2em] text-pistachio-300">
-              — I'm the Kunafa Guy
+              — I'm the Kunafah Guy
             </footer>
           </blockquote>
         )}

@@ -95,10 +95,10 @@ export const site: SiteConfig = {
   business: {
     name: 'The Kunafah Guy',
     nameArabic: 'كنافة',
-    taglinePrimary: "I'm the Kunafa Guy.",
-    taglineSecondary: 'Fresh kunafa + smash burgers. One griddle.',
+    taglinePrimary: "I'm the Kunafah Guy.",
+    taglineSecondary: 'Fresh kunafah + smash burgers. One griddle.',
     ownerName: 'Arafat Halloum',
-    heritageLine: 'Palestinian kunafa, made to order the way it should be.',
+    heritageLine: 'Palestinian kunafah, made to order the way it should be.',
   },
   contact: {
     phoneDisplay: '(209) 712-6676',
@@ -139,7 +139,7 @@ export const site: SiteConfig = {
     sourceUrl: null,
   },
   claims: {
-    votedBest: 'Voted #1 Kunafa in all of California',
+    votedBest: 'Voted #1 Kunafah in all of California',
     votedBestVerified: false, // must be true (with source) before badge styling ships
   },
   catering: {
@@ -156,14 +156,14 @@ export const site: SiteConfig = {
   menu: [
     {
       id: 'kunafa-classic',
-      name: 'Fresh Kunafa',
+      name: 'Fresh Kunafah',
       arabicName: 'كنافة',
       description:
         'Shredded kataifi, molten cheese, syrup, crushed pistachio — made to order.',
       price: null, // UNCONFIRMED
       category: 'kunafa',
       image: '/images/menu-kunafa-classic.jpg',
-      imageAlt: 'Fresh kunafa being lifted from the pan with a long cheese pull',
+      imageAlt: 'Fresh kunafah being lifted from the pan with a long cheese pull',
       status: 'UNCONFIRMED',
       featured: true,
     },
@@ -212,19 +212,19 @@ export const site: SiteConfig = {
       n: 2,
       title: 'Sear',
       caption: 'Griddle heat toasts it deep orange.',
-      image: { src: '/images/process-sear.jpg', alt: 'Kunafa pan searing on the griddle, ghee bubbling' },
+      image: { src: '/images/process-sear.jpg', alt: 'Kunafah pan searing on the griddle, ghee bubbling' },
     },
     {
       n: 3,
       title: 'Pull',
       caption: 'Molten cheese. The moment.',
-      image: { src: '/images/process-pull.jpg', alt: 'Close-up of the kunafa cheese pull' },
+      image: { src: '/images/process-pull.jpg', alt: 'Close-up of the kunafah cheese pull' },
     },
     {
       n: 4,
       title: 'Drench',
       caption: 'Syrup poured, pistachio crushed on top.',
-      image: { src: '/images/process-drench.jpg', alt: 'Syrup pouring over kunafa with pistachio sprinkle' },
+      image: { src: '/images/process-drench.jpg', alt: 'Syrup pouring over kunafah with pistachio sprinkle' },
     },
   ],
   flags: {

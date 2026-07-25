@@ -18,7 +18,7 @@ export function KunafaProcess({ steps }: KunafaProcessProps) {
       <SectionHeading
         id="process-heading"
         eyebrow="Fresh every single time"
-        title="How the Kunafa Happens"
+        title="How the Kunafah Happens"
         arabicAccent="كنافة"
         tone="dark"
       />

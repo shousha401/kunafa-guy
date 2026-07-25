@@ -19,7 +19,7 @@ export default function App() {
           deals={site.deals}
           heroImage={{
             src: '/images/hero-kunafa-pull.jpg',
-            alt: 'Fresh kunafa lifted from the pan with a long molten cheese pull',
+            alt: 'Fresh kunafah lifted from the pan with a long molten cheese pull',
           }}
         />
         <div className="bg-griddle-900">
