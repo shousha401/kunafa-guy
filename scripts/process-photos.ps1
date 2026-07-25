@@ -117,7 +117,7 @@ if (-not (Test-Path $KUNAFA)) { Write-Warning "Source photo missing: $KUNAFA"; r
 
 # Hand-picked crop rects against the 736x1103 kunafa photo. The four process
 # crops deliberately target different textures so the steps look distinct.
-Write-Slot 'hero-kunafa-pull'    $KUNAFA   0   40 736 981
+Write-Slot 'hero-kunafa-pull'    $KUNAFA   0  115 736 981
 Write-Slot 'menu-kunafa-classic' $KUNAFA   0  401 736 368
 Write-Slot 'process-shred'       $KUNAFA  40  700 300 300   # loose strands at the tray edge
 Write-Slot 'process-sear'        $KUNAFA  60  290 300 300   # toasted golden crust

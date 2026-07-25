@@ -96,7 +96,7 @@ export const site: SiteConfig = {
     name: 'The Kunafah Guy',
     nameArabic: 'كنافة',
     taglinePrimary: "I'm the Kunafa Guy.",
-    taglineSecondary: 'Fresh kunafa + smash burgers. One griddle. Fresno.',
+    taglineSecondary: 'Fresh kunafa + smash burgers. One griddle.',
     ownerName: 'Arafat Halloum',
     heritageLine: 'Palestinian kunafa, made to order the way it should be.',
   },

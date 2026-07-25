@@ -47,7 +47,7 @@ export function Hero({ business, contact, deals, heroImage }: HeroProps) {
         </span>
 
         <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-pistachio-300">
-          Fresno, CA · {business.heritageLine}
+          Fresno, CA
         </p>
 
         <h1
