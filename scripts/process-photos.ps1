@@ -119,14 +119,15 @@ if ($Source -xor $Slot) { throw 'Pass -Source and -Slot together, or neither.' }
 $SRC    = Join-Path $root 'photos-source'
 $TRAY   = Join-Path $SRC 'kunafah-tray-pull.jpg'  # 739 x 1600 - tray + cheese pull
 $MACRO  = Join-Path $SRC 'kunafah-macro.jpg'      # 739 x 1600 - close macro ("Crop" UI at top, avoid y<120)
+$PLATED = Join-Path $SRC 'kunafah-plated.jpg'     # 736 x 1103 - plated tray, used for the hero by owner's choice
 $TRUCK  = Join-Path $SRC 'truck.jpg'              # 1200 x 1600 - the truck + menu board
 $BANNER = Join-Path $SRC 'deal-banners.jpg'       # 1200 x 1600 - his 2-for-$10 / 2-for-$15 pull-ups
 $BURGER = 'C:\Users\shous\Downloads\double smash.jpeg'  # 236 x 314 thumbnail - STILL NEEDS a real photo
 
 if (-not (Test-Path $TRAY)) { Write-Warning "Source photo missing: $TRAY"; return }
 
-# Hero: the lifted piece + hanging strands, tray filling the lower frame.
-Write-Slot 'hero-kunafa-pull'    $TRAY    0  200 739 985
+# Hero: the plated tray shot. Chosen over the cheese-pull crop by the site owner.
+Write-Slot 'hero-kunafa-pull'    $PLATED  0  115 736 981
 
 # Menu cards. The TRAY photo is noticeably sharper than the MACRO one (which
 # is a soft, oversaturated video grab), so it carries most of the slots.
