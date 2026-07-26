@@ -60,31 +60,48 @@ export function FindUs({ location, hours, contact }: FindUsProps) {
           </p>
         </div>
 
-        <div className="overflow-hidden rounded-card shadow-lift">
-          {location.mapsEmbedUrl ? (
-            <iframe
-              src={location.mapsEmbedUrl}
-              title="Map to The Kunafah Guy"
+        <div className="flex flex-col gap-6">
+          {/* Look for this truck — a shared lot is hard to navigate by address alone */}
+          <figure className="overflow-hidden rounded-card shadow-lift">
+            <img
+              src="/images/find-us-truck.jpg"
+              alt="The Kunafah Guy food truck: white trailer with the name in red letters, an OPEN sign, and a Smash Burgers / Fresh Kunafah banner"
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="aspect-[4/3] w-full border-0 lg:h-full lg:min-h-[420px]"
-              allowFullScreen
+              width={1000}
+              height={750}
+              className="w-full object-cover"
             />
-          ) : (
-            <div className="flex aspect-[4/3] w-full items-center justify-center bg-cream-200 text-griddle-700">
-              <p className="px-6 text-center">
-                Map coming soon —{' '}
-                <a
-                  href={location.mapsDirectionsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-kunafa-600 underline"
-                >
-                  open in Google Maps
-                </a>
-              </p>
-            </div>
-          )}
+            <figcaption className="bg-griddle-900 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.18em] text-cream-100">
+              Look for this truck
+            </figcaption>
+          </figure>
+
+          <div className="overflow-hidden rounded-card shadow-lift">
+            {location.mapsEmbedUrl ? (
+              <iframe
+                src={location.mapsEmbedUrl}
+                title="Map to The Kunafah Guy"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="aspect-[4/3] w-full border-0"
+                allowFullScreen
+              />
+            ) : (
+              <div className="flex aspect-[4/3] w-full items-center justify-center bg-cream-200 text-griddle-700">
+                <p className="px-6 text-center">
+                  Map coming soon —{' '}
+                  <a
+                    href={location.mapsDirectionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-kunafa-600 underline"
+                  >
+                    open in Google Maps
+                  </a>
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </Section>

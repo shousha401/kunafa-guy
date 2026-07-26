@@ -54,6 +54,18 @@ export function DealBlock({ deals, contact }: DealBlockProps) {
         ))}
       </div>
 
+      {/* His own signage — proof the deal is real, not a web-only promo */}
+      <figure className="mt-12 overflow-hidden rounded-card shadow-lift">
+        <img
+          src="/images/deal-banners.jpg"
+          alt="Two of The Kunafah Guy's pull-up banners reading Smash Burgers 100% Beef Halal, 2 for $10 single and 2 for $15 double"
+          loading="lazy"
+          width={1000}
+          height={750}
+          className="w-full object-cover"
+        />
+      </figure>
+
       <div className="mt-12 flex justify-center">
         <CTAButton
           label="Call / Text to Order"

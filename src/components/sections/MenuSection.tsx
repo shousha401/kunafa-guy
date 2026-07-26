@@ -8,11 +8,12 @@ interface MenuSectionProps {
 }
 
 // Category order is enforced here, not by data order.
-const CATEGORY_ORDER: MenuItem['category'][] = ['kunafa', 'burgers', 'shawarma'];
+const CATEGORY_ORDER: MenuItem['category'][] = ['kunafah', 'burgers', 'chicken', 'sides'];
 const CATEGORY_LABELS: Record<MenuItem['category'], string> = {
-  kunafa: 'Kunafah',
+  kunafah: 'Kunafah',
   burgers: 'Smash Burgers',
-  shawarma: 'Shawarma',
+  chicken: 'Chicken',
+  sides: 'Sides',
 };
 
 function MenuCard({ item }: { item: MenuItem }) {
@@ -23,29 +24,12 @@ function MenuCard({ item }: { item: MenuItem }) {
       }`}
     >
       <div className={`overflow-hidden ${item.featured ? 'aspect-[16/9] md:aspect-[2/1]' : 'aspect-[4/3]'} bg-griddle-800`}>
-        {item.image ? (
-          <img
-            src={item.image}
-            alt={item.imageAlt}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-[600ms] ease-griddle motion-safe:hover:scale-105"
-          />
-        ) : (
-          // No photo supplied yet — branded tile rather than a fake image
-          <div className="texture-noise flex h-full w-full flex-col items-center justify-center gap-2 bg-griddle-800 px-4 text-center">
-            <span
-              dir="rtl"
-              lang="ar"
-              aria-hidden="true"
-              className="font-arabic text-3xl text-kunafa-500/70"
-            >
-              كنافة
-            </span>
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-cream-100/60">
-              Photo coming soon
-            </span>
-          </div>
-        )}
+        <img
+          src={item.image}
+          alt={item.imageAlt}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-[600ms] ease-griddle motion-safe:hover:scale-105"
+        />
       </div>
       <div className="flex flex-1 flex-col gap-2 p-5">
         <div className="flex items-baseline justify-between gap-3">
@@ -67,6 +51,23 @@ function MenuCard({ item }: { item: MenuItem }) {
   );
 }
 
+/**
+ * Compact row for items we have no photo of yet. A whole category of
+ * "photo coming soon" tiles reads as broken; a classic price list reads as
+ * intentional — and still shows the real price.
+ */
+function MenuRow({ item }: { item: MenuItem }) {
+  return (
+    <li className="flex items-baseline gap-3 border-b border-griddle-700/15 py-3 last:border-b-0">
+      <span className="font-display text-lg font-bold tracking-tight text-griddle-900">
+        {item.name}
+      </span>
+      <span aria-hidden="true" className="min-w-6 flex-1 border-b border-dotted border-griddle-700/30" />
+      <PriceTag price={item.price} label={item.priceLabel} status={item.status} tone="light" />
+    </li>
+  );
+}
+
 export function MenuSection({ items }: MenuSectionProps) {
   return (
     <Section id="menu" tone="light" labelledBy="menu-heading">
@@ -82,16 +83,27 @@ export function MenuSection({ items }: MenuSectionProps) {
         {CATEGORY_ORDER.map((cat) => {
           const catItems = items.filter((i) => i.category === cat);
           if (catItems.length === 0) return null;
+          // Photo cards when we have photography for the category; otherwise a
+          // clean price list. Keeps the menu honest without looking unfinished.
+          const hasPhotos = catItems.some((i) => i.image);
           return (
             <div key={cat}>
               <h3 className="mb-5 font-display text-2xl font-extrabold tracking-tight text-griddle-800">
                 {CATEGORY_LABELS[cat]}
               </h3>
-              <ul className="grid list-none grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {catItems.map((item) => (
-                  <MenuCard key={item.id} item={item} />
-                ))}
-              </ul>
+              {hasPhotos ? (
+                <ul className="grid list-none grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {catItems.map((item) => (
+                    <MenuCard key={item.id} item={item} />
+                  ))}
+                </ul>
+              ) : (
+                <ul className="list-none rounded-card bg-cream-100 px-5 py-1 sm:max-w-xl">
+                  {catItems.map((item) => (
+                    <MenuRow key={item.id} item={item} />
+                  ))}
+                </ul>
+              )}
             </div>
           );
         })}

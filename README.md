@@ -48,15 +48,13 @@ Run it with no arguments to rebuild every slot from the currently mapped source 
 
 ### Photo status (as of this build)
 
+Arafat's own photos are in `photos-source/` and feed every slot via the script above.
+
 | Slot | Source | Still needed |
 |---|---|---|
-| Hero, menu kunafa, all 4 process steps | crops of one supplied kunafa photo (736×1103) | Arafat's own kunafa shots; the process steps currently show the finished tray, not the actual shred/sear/pull/drench stages |
-| Both burger cards | one supplied "double smash" photo (236×314) | a higher-resolution original — this one is a thumbnail and looks soft when enlarged; also a genuine single-patty shot for the Smash Burger card |
-| Shawarma | none | any shawarma photo |
-
-**Licensing:** the supplied kunafa photo looks like professional stock/editorial
-photography. Confirm it's licensed for commercial use — or replace it with Arafat's
-own shot — before this site goes public.
+| Hero, kunafah menu cards, all 4 process steps, Find Us truck, Deal banners | Arafat's own photos (sent 2026-07-25) | The 4 process steps are macro crops of one finished tray, not the actual shred/sear/pull/drench stages |
+| Both burger cards | an old "double smash" photo (236×314) | **A real burger photo.** This one is a thumbnail and looks soft; both cards also show the same double-patty shot, so a single-patty photo is needed too |
+| Chicken, Sides | none | Photos optional — these render as a clean price list until a photo is added |
 
 ### Hours
 Hours are intentionally NOT listed — they vary daily. The site sends people to Instagram.

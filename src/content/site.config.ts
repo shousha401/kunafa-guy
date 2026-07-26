@@ -15,7 +15,7 @@ export interface MenuItem {
   price: number | null; // null → price hidden, badge shown
   priceLabel?: string; // override e.g. "2 for $10"
   unit?: string; // e.g. 'each', 'tray', 'per person'
-  category: 'kunafa' | 'burgers' | 'shawarma';
+  category: 'kunafah' | 'burgers' | 'chicken' | 'sides';
   image: string; // path under /images/ — see asset manifest in build spec
   imageAlt: string; // REQUIRED — real alt text, not filename
   status: ItemStatus;
@@ -149,85 +149,145 @@ export const site: SiteConfig = {
       'Hi! Catering inquiry — Name: {name} | Date: {date} | City: {city} | Guests: {headcount}',
     fields: ['name', 'date', 'city', 'headcount'],
   },
+  // Confirmed from the owner's own pull-up banners (photos sent 2026-07-25):
+  // "2 FOR $10 SINGLE" and "2 FOR $15 DOUBLE".
   deals: [
-    { id: 'deal-2-single', label: '2 Smash Burgers', price: 10, status: 'UNCONFIRMED' },
-    { id: 'deal-2-double', label: '2 Double Smash Burgers', price: 15, status: 'UNCONFIRMED' },
+    { id: 'deal-2-single', label: '2 Smash Burgers', price: 10, status: 'CONFIRMED' },
+    { id: 'deal-2-double', label: '2 Double Smash Burgers', price: 15, status: 'CONFIRMED' },
   ],
+  // Every price below is transcribed from the menu board on the owner's own
+  // truck (photos sent 2026-07-25), so all items are CONFIRMED. Items with no
+  // photo yet use image: '' — see MenuSection for how those render.
   menu: [
     {
-      id: 'kunafa-classic',
-      name: 'Fresh Kunafah',
+      id: 'kunafah-classic',
+      name: 'Kunafah',
       arabicName: 'كنافة',
       description:
         'Shredded kataifi, molten cheese, syrup, crushed pistachio — made to order.',
-      price: null, // UNCONFIRMED
-      category: 'kunafa',
+      price: 7,
+      category: 'kunafah',
       image: '/images/menu-kunafa-classic.jpg',
-      imageAlt: 'Fresh kunafah being lifted from the pan with a long cheese pull',
-      status: 'UNCONFIRMED',
+      imageAlt: 'Fresh kunafah being lifted from the tray with a long cheese pull',
+      status: 'CONFIRMED',
       featured: true,
+    },
+    {
+      id: 'kunafah-tray',
+      name: 'Kunafah Tray',
+      arabicName: 'كنافة',
+      description: 'Whole tray, made to order.',
+      price: null,
+      priceLabel: 'S $25 · M $45 · L $65',
+      category: 'kunafah',
+      image: '/images/menu-kunafah-tray.jpg',
+      imageAlt: 'Full tray of kunafah topped with crushed pistachio',
+      status: 'CONFIRMED',
     },
     {
       id: 'burger-smash',
       name: 'Smash Burger',
-      description: 'Crispy lacy edges, hard griddle sear.',
-      price: null, // UNCONFIRMED — deal price known, single price not
+      description: 'Crispy lacy edges, hard griddle sear. 100% halal beef.',
+      price: 8,
       category: 'burgers',
       image: '/images/menu-burger-smash.jpg',
       imageAlt: 'Smash burger with crispy caramelized edges on a griddle',
-      status: 'UNCONFIRMED',
+      status: 'CONFIRMED',
     },
     {
       id: 'burger-double',
-      name: 'Double Smash Burger',
-      description: 'Two patties, double the crust.',
-      price: null,
+      name: 'Double Burger',
+      description: 'Two patties, double the crust. 100% halal beef.',
+      price: 10,
       category: 'burgers',
       image: '/images/menu-burger-double.jpg',
       imageAlt: 'Double smash burger stacked with melted cheese',
-      status: 'UNCONFIRMED',
+      status: 'CONFIRMED',
     },
     {
-      id: 'shawarma-sandwich',
-      name: 'Shawarma Sandwich',
-      description: 'Marinated, stacked, shaved hot off the spit.', // UNCONFIRMED — get owner's words
-      price: null,
-      category: 'shawarma',
-      // No photo yet — empty string renders the branded "photo coming soon" tile.
-      // Drop a shot at /images/menu-shawarma.jpg and put the path back here.
-      image: '',
-      imageAlt: 'Wrapped shawarma sandwich, cut to show the filling',
-      status: 'UNCONFIRMED',
+      id: 'chicken-sandwich',
+      name: 'Chicken Sandwich',
+      description: '',
+      price: 7,
+      category: 'chicken',
+      image: '', // no photo yet
+      imageAlt: 'Chicken sandwich',
+      status: 'CONFIRMED',
     },
-    // Add new items here as the owner confirms the menu — components never change.
+    {
+      id: 'chicken-wings',
+      name: 'Chicken Wings',
+      description: '',
+      price: 8,
+      category: 'chicken',
+      image: '',
+      imageAlt: 'Chicken wings',
+      status: 'CONFIRMED',
+    },
+    {
+      id: 'chicken-wings-fries',
+      name: 'Chicken Wings with Fries',
+      description: '',
+      price: 11,
+      category: 'chicken',
+      image: '',
+      imageAlt: 'Chicken wings served with fries',
+      status: 'CONFIRMED',
+    },
+    {
+      id: 'large-fries',
+      name: 'Large Fries',
+      description: '',
+      price: 5,
+      category: 'sides',
+      image: '',
+      imageAlt: 'Large portion of fries',
+      status: 'CONFIRMED',
+    },
+    {
+      id: 'add-fries-drink',
+      name: 'Add Fries and Drink',
+      description: '',
+      price: 5,
+      category: 'sides',
+      image: '',
+      imageAlt: 'Fries and a drink added to any order',
+      status: 'CONFIRMED',
+    },
+    // Add new items here as the owner confirms them — components never change.
   ],
+  // NOTE: these four images are different macro crops of one finished tray —
+  // we don't have photos of the actual shred/sear/pull/drench stages yet, so
+  // the alt text describes what each crop really shows.
   process: [
     {
       n: 1,
       title: 'Shred',
       caption: 'Kataifi shreds hit the buttered pan.',
-      image: { src: '/images/process-shred.jpg', alt: 'Kataifi shreds going into the pan' },
+      image: { src: '/images/process-shred.jpg', alt: 'Close-up of shredded kataifi topped with crushed pistachio' },
     },
     {
       n: 2,
       title: 'Sear',
       caption: 'Griddle heat toasts it deep orange.',
-      image: { src: '/images/process-sear.jpg', alt: 'Kunafah pan searing on the griddle, ghee bubbling' },
+      image: { src: '/images/process-sear.jpg', alt: 'Deep golden toasted kunafah crust' },
     },
     {
       n: 3,
       title: 'Pull',
       caption: 'Molten cheese. The moment.',
-      image: { src: '/images/process-pull.jpg', alt: 'Close-up of the kunafah cheese pull' },
+      image: { src: '/images/process-pull.jpg', alt: 'Molten cheese stretching in long strands from a slice of kunafah' },
     },
     {
       n: 4,
       title: 'Drench',
       caption: 'Syrup poured, pistachio crushed on top.',
-      image: { src: '/images/process-drench.jpg', alt: 'Syrup pouring over kunafah with pistachio sprinkle' },
+      image: { src: '/images/process-drench.jpg', alt: 'Syrup-glossed kunafah under a blanket of crushed pistachio' },
     },
   ],
   flags: {
-    halal: 'UNCONFIRMED',
+    // His banner reads "SMASH BURGERS 100% BEEF HALAL" and the truck banner
+    // reads "HALAL" — self-described by the owner, not third-party certified.
+    halal: 'CONFIRMED',
   },
 };

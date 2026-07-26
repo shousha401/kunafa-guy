@@ -73,34 +73,56 @@ kunafah-guy-build-spec.md    original build spec — asset manifest + OPEN QUEST
 Built and working: all 8 sections, config-driven, builds clean, no horizontal overflow
 at 320–1440px, one `<h1>`, alt text on every image.
 
-**Photos.** Only two real photos exist (both owner-supplied, in `~/Downloads`):
-a kunafa tray shot (736×1103) and a "double smash" burger shot (236×314).
-`scripts/process-photos.ps1` crops them into every slot. Consequences to remember:
+**Menu is real.** On 2026-07-25 the owner sent photos of his own truck. The menu
+board in them is legible, so every price in `site.config.ts` is now transcribed
+from it and marked `CONFIRMED` — no "price TBC" badges render any more:
 
-- Both burger cards show the *same double-patty photo* — there is no single-patty shot.
-- The four process steps are four different macro crops of the finished kunafa tray,
-  not actual shred/sear/pull/drench stages.
-- The burger source is a thumbnail, so it looks soft when enlarged.
-- Shawarma has no photo: its config `image` is `''`, which makes `MenuSection` render a
-  branded "photo coming soon" tile. Drop a file at `/images/menu-shawarma.jpg` and
-  restore the path to fix.
-- **Licensing risk:** the kunafa photo looks like professional stock/editorial work.
-  Confirm a commercial licence or replace it with Arafat's own shot before launch.
+| | |
+|---|---|
+| Kunafah $7 · Trays S $25 / M $45 / L $65 | Smash Burger $8 · Double Burger $10 |
+| Chicken Sandwich $7 · Wings $8 · Wings w/ Fries $11 | Large Fries $5 · Add Fries and Drink $5 |
+
+Deals confirmed off his pull-up banners: 2 for $10 (single), 2 for $15 (double).
+Halal is `CONFIRMED` — his banner reads "100% BEEF HALAL", so it's *self-described
+by the owner*, not third-party certified. Word it that way.
+
+**Photos.** `photos-source/` holds the owner's four originals (kept in-repo so the
+pipeline is reproducible); `scripts/process-photos.ps1` crops them into every slot.
+This replaced the earlier stock-looking kunafa shot, so **the licensing risk is gone.**
+Consequences to remember:
+
+- `kunafah-tray-pull.jpg` carries most slots — it's much sharper than `kunafah-macro.jpg`,
+  which is a soft, oversaturated video grab. Prefer the tray one.
+- The four process steps are still four macro crops of one finished tray, not actual
+  shred/sear/pull/drench stages. Alt text says what each crop really shows.
+- Burgers still use the old 236×314 thumbnail — **the one real gap.** Both burger cards
+  show the same double-patty photo; there is no single-patty shot.
+- Chicken and Sides have no photos, so `MenuSection` renders those categories as a
+  clean price list instead of a wall of placeholder tiles (see `hasPhotos` there).
+  Add a photo to any item in a category and it switches to photo cards.
 
 ## Launch blockers
 
-Full list is §7 OPEN QUESTIONS in `kunafah-guy-build-spec.md`. The ones that actually
-block going public:
+Full list is §7 OPEN QUESTIONS in `kunafah-guy-build-spec.md`. His 2026-07-25 photos
+resolved menu/prices, halal, photo licensing and the deal pricing. What's left:
 
-1. Real menu and prices (everything is currently UNCONFIRMED, including the $10/$15 deal).
-2. "Voted #1 Kunafa in all of California" — voted by whom? Until `claims.votedBestVerified`
-   is `true` *with a source*, it renders as an owner quote, not a fact badge. Shipping it
-   as fact without a source is a liability.
-3. Halal — confirmed and certified, or self-described? Footer note is hidden until
-   `flags.halal === 'CONFIRMED'`.
-4. Review stats (4.5 / 46) — which platform, and the profile URL.
-5. Photo licensing + real photography.
-6. Domain, for canonical and OG URLs.
+1. **"Voted #1 Kunafah in all of California"** — voted by whom? Until
+   `claims.votedBestVerified` is `true` *with a source*, it renders as an owner quote,
+   not a fact badge. Shipping it as fact without a source is a liability.
+2. **Review stats (4.5 / 46)** — which platform, and the profile URL.
+3. **Domain**, for canonical and OG URLs (currently relative, which works on any host).
+4. **A real burger photo** — see Photos above.
+5. **Facebook handle** — config has `the_kunafa_guy` (no h). Unverified; don't "fix"
+   the spelling, it's a real account slug and changing it would break the link.
+
+Two open questions from the truck photos, **not resolved — ask the owner, don't guess**:
+
+- **Shawarma is gone from his board.** It listed Chicken Sandwich instead, so the config
+  now matches the board. Confirm he really dropped shawarma.
+- **The truck carries a sign reading "LOCATED AT 208 LORAIN ROAD, NORTH OLMSTED"** —
+  that's Ohio. The photo is plainly at the Fresno lot (LifeStyle Furniture is in frame)
+  and his banner says 21 E Shaw Ave, so it's probably a leftover from the trailer's
+  previous life. **The address was left untouched.**
 
 ## Environment gotchas already hit
 

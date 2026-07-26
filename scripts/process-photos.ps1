@@ -32,15 +32,20 @@ $imgDir = Join-Path $root 'public\images'
 
 # name -> output pixels + weight budget. Aspect is implied by width/height.
 $Slots = @{
-    'hero-kunafa-pull'    = @{ W = 900;  H = 1200; KB = 245 }  # 3:4, full-bleed hero
-    'menu-kunafa-classic' = @{ W = 1050; H = 525;  KB = 120 }  # 2:1, featured menu card
-    'menu-burger-smash'   = @{ W = 700;  H = 525;  KB = 115 }  # 4:3
-    'menu-burger-double'  = @{ W = 700;  H = 525;  KB = 115 }  # 4:3
-    'menu-shawarma'       = @{ W = 700;  H = 525;  KB = 115 }  # 4:3
-    'process-shred'       = @{ W = 620;  H = 620;  KB = 105 }  # 1:1
-    'process-sear'        = @{ W = 620;  H = 620;  KB = 105 }  # 1:1
-    'process-pull'        = @{ W = 620;  H = 620;  KB = 105 }  # 1:1
-    'process-drench'      = @{ W = 620;  H = 620;  KB = 105 }  # 1:1
+    'hero-kunafa-pull'      = @{ W = 900;  H = 1200; KB = 245 }  # 3:4, full-bleed hero
+    'menu-kunafa-classic'   = @{ W = 1050; H = 525;  KB = 120 }  # 2:1, featured menu card
+    'menu-kunafah-tray'     = @{ W = 700;  H = 525;  KB = 115 }  # 4:3
+    'menu-burger-smash'     = @{ W = 700;  H = 525;  KB = 115 }  # 4:3
+    'menu-burger-double'    = @{ W = 700;  H = 525;  KB = 115 }  # 4:3
+    'menu-chicken-sandwich' = @{ W = 700;  H = 525;  KB = 115 }  # 4:3 - no photo yet
+    'menu-wings'            = @{ W = 700;  H = 525;  KB = 115 }  # 4:3 - no photo yet
+    'menu-fries'            = @{ W = 700;  H = 525;  KB = 115 }  # 4:3 - no photo yet
+    'process-shred'         = @{ W = 620;  H = 620;  KB = 105 }  # 1:1
+    'process-sear'          = @{ W = 620;  H = 620;  KB = 105 }  # 1:1
+    'process-pull'          = @{ W = 620;  H = 620;  KB = 105 }  # 1:1
+    'process-drench'        = @{ W = 620;  H = 620;  KB = 105 }  # 1:1
+    'find-us-truck'         = @{ W = 1000; H = 750;  KB = 150 }  # 4:3, "look for this truck"
+    'deal-banners'          = @{ W = 1000; H = 750;  KB = 150 }  # 4:3, his own deal signage
 }
 
 function Save-Jpeg($bmp, $path, $q) {
@@ -108,21 +113,35 @@ if ($Source -and $Slot) {
 if ($Source -xor $Slot) { throw 'Pass -Source and -Slot together, or neither.' }
 
 # ---------------------------------------------------------------------------
-# Current mapping. Both photos were supplied by the owner in July 2026.
-# Replace these paths as real photography arrives, then re-run.
-$KUNAFA = 'C:\Users\shous\Downloads\kunafa.jpeg'        # 736 x 1103
-$BURGER = 'C:\Users\shous\Downloads\double smash.jpeg'  # 236 x 314 (thumbnail - soft when enlarged)
+# Source photos. The four in photos-source/ are the OWNER'S OWN photos, sent
+# July 25 2026 - they replaced the earlier stock-looking kunafa shot and its
+# licensing question. Kept in-repo so this pipeline is reproducible.
+$SRC    = Join-Path $root 'photos-source'
+$TRAY   = Join-Path $SRC 'kunafah-tray-pull.jpg'  # 739 x 1600 - tray + cheese pull
+$MACRO  = Join-Path $SRC 'kunafah-macro.jpg'      # 739 x 1600 - close macro ("Crop" UI at top, avoid y<120)
+$TRUCK  = Join-Path $SRC 'truck.jpg'              # 1200 x 1600 - the truck + menu board
+$BANNER = Join-Path $SRC 'deal-banners.jpg'       # 1200 x 1600 - his 2-for-$10 / 2-for-$15 pull-ups
+$BURGER = 'C:\Users\shous\Downloads\double smash.jpeg'  # 236 x 314 thumbnail - STILL NEEDS a real photo
 
-if (-not (Test-Path $KUNAFA)) { Write-Warning "Source photo missing: $KUNAFA"; return }
+if (-not (Test-Path $TRAY)) { Write-Warning "Source photo missing: $TRAY"; return }
 
-# Hand-picked crop rects against the 736x1103 kunafa photo. The four process
-# crops deliberately target different textures so the steps look distinct.
-Write-Slot 'hero-kunafa-pull'    $KUNAFA   0  115 736 981
-Write-Slot 'menu-kunafa-classic' $KUNAFA   0  401 736 368
-Write-Slot 'process-shred'       $KUNAFA  40  700 300 300   # loose strands at the tray edge
-Write-Slot 'process-sear'        $KUNAFA  60  290 300 300   # toasted golden crust
-Write-Slot 'process-pull'        $KUNAFA 170  590 300 300   # cut wedge, interior showing
-Write-Slot 'process-drench'      $KUNAFA 230  360 300 300   # pistachio blanket
+# Hero: the lifted piece + hanging strands, tray filling the lower frame.
+Write-Slot 'hero-kunafa-pull'    $TRAY    0  200 739 985
+
+# Menu cards. The TRAY photo is noticeably sharper than the MACRO one (which
+# is a soft, oversaturated video grab), so it carries most of the slots.
+Write-Slot 'menu-kunafa-classic' $TRAY    0  250 739 370   # 2:1 lifted piece + strands
+Write-Slot 'menu-kunafah-tray'   $TRAY    0  830 739 554   # full tray, for the S/M/L trays
+
+# Process steps - four different real textures so the steps look distinct.
+Write-Slot 'process-shred'       $TRAY   60 1080 620 620   # kataifi surface + pistachio
+Write-Slot 'process-sear'        $TRAY   60  900 620 620   # golden toasted crust
+Write-Slot 'process-pull'        $TRAY   60  280 620 620   # the cheese pull itself
+Write-Slot 'process-drench'      $TRAY   60  640 620 620   # syrup sheen + pistachio blanket
+
+# Location + deal signage
+Write-Slot 'find-us-truck'       $TRUCK    0  330 1200 900
+Write-Slot 'deal-banners'        $BANNER  20  170 1100 825
 
 if (Test-Path $BURGER) {
     Write-Slot 'menu-burger-double' $BURGER  0  67 236 177
