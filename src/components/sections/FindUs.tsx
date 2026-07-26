@@ -15,6 +15,22 @@ export function FindUs({ location, hours, contact }: FindUsProps) {
     <Section id="find-us" tone="light" labelledBy="find-us-heading">
       <SectionHeading id="find-us-heading" eyebrow="Fresno, CA" title="Find Us" tone="light" />
 
+      {/* Truck first: in a shared lot people recognise the trailer long before
+          they parse an address, so this leads the section. */}
+      <figure className="mb-10 overflow-hidden rounded-card shadow-lift">
+        <img
+          src="/images/find-us-truck.jpg"
+          alt="The Kunafah Guy food truck: white trailer with the name in red letters, an OPEN sign, and a Smash Burgers / Fresh Kunafah banner"
+          loading="lazy"
+          width={1000}
+          height={750}
+          className="w-full object-cover"
+        />
+        <figcaption className="bg-griddle-900 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.18em] text-cream-100">
+          Look for this truck
+        </figcaption>
+      </figure>
+
       <div className="grid gap-10 lg:grid-cols-2">
         <div className="flex flex-col gap-6">
           <div>
@@ -61,21 +77,6 @@ export function FindUs({ location, hours, contact }: FindUsProps) {
         </div>
 
         <div className="flex flex-col gap-6">
-          {/* Look for this truck — a shared lot is hard to navigate by address alone */}
-          <figure className="overflow-hidden rounded-card shadow-lift">
-            <img
-              src="/images/find-us-truck.jpg"
-              alt="The Kunafah Guy food truck: white trailer with the name in red letters, an OPEN sign, and a Smash Burgers / Fresh Kunafah banner"
-              loading="lazy"
-              width={1000}
-              height={750}
-              className="w-full object-cover"
-            />
-            <figcaption className="bg-griddle-900 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.18em] text-cream-100">
-              Look for this truck
-            </figcaption>
-          </figure>
-
           <div className="overflow-hidden rounded-card shadow-lift">
             {location.mapsEmbedUrl ? (
               <iframe
