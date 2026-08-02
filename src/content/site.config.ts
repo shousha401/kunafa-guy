@@ -256,7 +256,7 @@ export const site: SiteConfig = {
     },
     // Add new items here as the owner confirms them — components never change.
   ],
-  // NOTE: these four images are different macro crops of one finished tray —
+  // NOTE: these four images are different macro crops of one baked tray —
   // we don't have photos of the actual shred/sear/pull/drench stages yet, so
   // the alt text describes what each crop really shows.
   process: [
@@ -264,25 +264,25 @@ export const site: SiteConfig = {
       n: 1,
       title: 'Shred',
       caption: 'Kataifi shreds hit the buttered pan.',
-      image: { src: '/images/process-shred.jpg', alt: 'Close-up of shredded kataifi topped with crushed pistachio' },
+      image: { src: '/images/process-shred.jpg', alt: 'Corner of a baked kunafah tray showing plain golden kataifi against the pan edge' },
     },
     {
       n: 2,
       title: 'Sear',
       caption: 'Griddle heat toasts it deep orange.',
-      image: { src: '/images/process-sear.jpg', alt: 'Deep golden toasted kunafah crust' },
+      image: { src: '/images/process-sear.jpg', alt: 'Golden toasted kataifi crust with crushed pistachio scattered at the edge' },
     },
     {
       n: 3,
       title: 'Pull',
       caption: 'Molten cheese. The moment.',
-      image: { src: '/images/process-pull.jpg', alt: 'Molten cheese stretching in long strands from a slice of kunafah' },
+      image: { src: '/images/process-pull.jpg', alt: 'Cut triangle of kunafah heavily topped with crushed pistachio' },
     },
     {
       n: 4,
       title: 'Drench',
       caption: 'Syrup poured, pistachio crushed on top.',
-      image: { src: '/images/process-drench.jpg', alt: 'Syrup-glossed kunafah under a blanket of crushed pistachio' },
+      image: { src: '/images/process-drench.jpg', alt: 'Close-up of crushed pistachio blanketing syrup-glossed kunafah' },
     },
   ],
   flags: {

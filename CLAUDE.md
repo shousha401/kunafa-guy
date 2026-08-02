@@ -88,13 +88,20 @@ by the owner*, not third-party certified. Word it that way.
 
 **Photos.** `photos-source/` holds the owner's four originals (kept in-repo so the
 pipeline is reproducible); `scripts/process-photos.ps1` crops them into every slot.
-This replaced the earlier stock-looking kunafa shot, so **the licensing risk is gone.**
-Consequences to remember:
+This replaced the earlier stock-looking kunafa shot, so **the licensing risk is gone
+for the hero, menu, Find Us and deal-banner slots.**
 
 - `kunafah-tray-pull.jpg` carries most slots — it's much sharper than `kunafah-macro.jpg`,
   which is a soft, oversaturated video grab. Prefer the tray one.
-- The four process steps are still four macro crops of one finished tray, not actual
-  shred/sear/pull/drench stages. Alt text says what each crop really shows.
+- **The four "How the Kunafah Happens" process photos are the exception.** On 2026-08-01
+  the owner asked to swap them back to the pre-truck-photo set (restored from git history,
+  commit `bb37d65`), because he didn't like the truck-photo crops for that section. This
+  **reopens the unresolved licensing question** on that photo — it predates the owner's
+  confirmed photos and its source was never verified. `scripts/process-photos.ps1` has the
+  four `process-*` lines commented out so a routine re-run won't silently overwrite them.
+  Still four macro crops of one baked tray, not actual shred/sear/pull/drench stages —
+  alt text says what each crop really shows. Get the licensing question resolved (or a
+  real replacement photo) before treating this as launch-ready.
 - Burgers still use the old 236×314 thumbnail — **the one real gap.** Both burger cards
   show the same double-patty photo; there is no single-patty shot.
 - Chicken and Sides have no photos, so `MenuSection` renders those categories as a
@@ -104,7 +111,8 @@ Consequences to remember:
 ## Launch blockers
 
 Full list is §7 OPEN QUESTIONS in `kunafah-guy-build-spec.md`. His 2026-07-25 photos
-resolved menu/prices, halal, photo licensing and the deal pricing. What's left:
+resolved menu/prices, halal, and the deal pricing; photo licensing is resolved for
+every slot except the process section (see below). What's left:
 
 1. **"Voted #1 Kunafah in all of California"** — voted by whom? Until
    `claims.votedBestVerified` is `true` *with a source*, it renders as an owner quote,
@@ -114,6 +122,9 @@ resolved menu/prices, halal, photo licensing and the deal pricing. What's left:
 4. **A real burger photo** — see Photos above.
 5. **Facebook handle** — config has `the_kunafa_guy` (no h). Unverified; don't "fix"
    the spelling, it's a real account slug and changing it would break the link.
+6. **Process section photo licensing (reopened 2026-08-01)** — the four "How the
+   Kunafah Happens" images are back to the pre-truck-photo set at the owner's request;
+   see Photos above. Source/license unverified.
 
 Two open questions from the truck photos, **not resolved — ask the owner, don't guess**:
 

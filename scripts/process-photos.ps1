@@ -134,11 +134,16 @@ Write-Slot 'hero-kunafa-pull'    $PLATED  0  115 736 981
 Write-Slot 'menu-kunafa-classic' $TRAY    0  250 739 370   # 2:1 lifted piece + strands
 Write-Slot 'menu-kunafah-tray'   $TRAY    0  830 739 554   # full tray, for the S/M/L trays
 
-# Process steps - four different real textures so the steps look distinct.
-Write-Slot 'process-shred'       $TRAY   60 1080 620 620   # kataifi surface + pistachio
-Write-Slot 'process-sear'        $TRAY   60  900 620 620   # golden toasted crust
-Write-Slot 'process-pull'        $TRAY   60  280 620 620   # the cheese pull itself
-Write-Slot 'process-drench'      $TRAY   60  640 620 620   # syrup sheen + pistachio blanket
+# Process steps - PINNED, do not regenerate from $TRAY. The owner asked to go
+# back to the pre-truck-photo set for this section (2026-08-01), restored from
+# git history (commit bb37d65) rather than cropped from a current source file.
+# That set has no source in photos-source/ and carries the open licensing
+# question noted in CLAUDE.md - re-running these four lines would silently
+# overwrite the restored files with the truck-photo crops again.
+# Write-Slot 'process-shred'       $TRAY   60 1080 620 620   # kataifi surface + pistachio
+# Write-Slot 'process-sear'        $TRAY   60  900 620 620   # golden toasted crust
+# Write-Slot 'process-pull'        $TRAY   60  280 620 620   # the cheese pull itself
+# Write-Slot 'process-drench'      $TRAY   60  640 620 620   # syrup sheen + pistachio blanket
 
 # Location + deal signage
 Write-Slot 'find-us-truck'       $TRUCK    0  330 1200 900
