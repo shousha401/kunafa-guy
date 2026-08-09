@@ -8,12 +8,13 @@ interface MenuSectionProps {
 }
 
 // Category order is enforced here, not by data order.
-const CATEGORY_ORDER: MenuItem['category'][] = ['kunafah', 'burgers', 'chicken', 'sides'];
+const CATEGORY_ORDER: MenuItem['category'][] = ['kunafah', 'burgers', 'chicken', 'sides', 'drinks'];
 const CATEGORY_LABELS: Record<MenuItem['category'], string> = {
   kunafah: 'Kunafah',
   burgers: 'Smash Burgers',
   chicken: 'Chicken',
   sides: 'Sides',
+  drinks: 'Drinks',
 };
 
 function MenuCard({ item }: { item: MenuItem }) {

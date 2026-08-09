@@ -15,7 +15,7 @@ export interface MenuItem {
   price: number | null; // null → price hidden, badge shown
   priceLabel?: string; // override e.g. "2 for $10"
   unit?: string; // e.g. 'each', 'tray', 'per person'
-  category: 'kunafah' | 'burgers' | 'chicken' | 'sides';
+  category: 'kunafah' | 'burgers' | 'chicken' | 'sides' | 'drinks';
   image: string; // path under /images/ — see asset manifest in build spec
   imageAlt: string; // REQUIRED — real alt text, not filename
   status: ItemStatus;
@@ -155,20 +155,22 @@ export const site: SiteConfig = {
     { id: 'deal-2-single', label: '2 Smash Burgers', price: 10, status: 'CONFIRMED' },
     { id: 'deal-2-double', label: '2 Double Smash Burgers', price: 15, status: 'CONFIRMED' },
   ],
-  // Every price below is transcribed from the menu board on the owner's own
-  // truck (photos sent 2026-07-25), so all items are CONFIRMED. Items with no
-  // photo yet use image: '' — see MenuSection for how those render.
+  // Every price below is transcribed from the menu board in the truck's service
+  // window (owner's photos, 2026-08-08). That board REPLACED the one photographed
+  // 2026-07-25, and most prices moved — kunafah 7→8, smash burger 8→7, chicken
+  // sandwich 7→6 — so do not merge the two boards. Items with no photo yet use
+  // image: '' — see MenuSection for how those render.
   menu: [
     {
       id: 'kunafah-classic',
-      name: 'Kunafah',
+      name: 'Fresh Kunafah Slice', // board wording, verbatim
       arabicName: 'كنافة',
       description:
         'Shredded kataifi, molten cheese, syrup, crushed pistachio — made to order.',
-      price: 7,
+      price: 8,
       category: 'kunafah',
       image: '/images/menu-kunafa-classic.jpg',
-      imageAlt: 'Fresh kunafah being lifted from the tray with a long cheese pull',
+      imageAlt: 'Golden kunafah tray topped with crushed pistachio, cheese pull strands draped over the rim',
       status: 'CONFIRMED',
       featured: true,
     },
@@ -176,19 +178,23 @@ export const site: SiteConfig = {
       id: 'kunafah-tray',
       name: 'Kunafah Tray',
       arabicName: 'كنافة',
-      description: 'Whole tray, made to order.',
+      // Trays are NOT on the 2026-08-08 board. The old board listed S $25 / M $45
+      // / L $65, but that board is gone and every price on it moved, so those
+      // numbers are no longer sourced. Downgraded to UNCONFIRMED (renders "price
+      // TBC") rather than shipping a stale number. Restore priceLabel and flip to
+      // CONFIRMED the moment the owner confirms current tray pricing.
+      description: 'Whole tray, made to order. Call or text for sizes and pricing.',
       price: null,
-      priceLabel: 'S $25 · M $45 · L $65',
       category: 'kunafah',
       image: '/images/menu-kunafah-tray.jpg',
       imageAlt: 'Full tray of kunafah topped with crushed pistachio',
-      status: 'CONFIRMED',
+      status: 'UNCONFIRMED',
     },
     {
       id: 'burger-smash',
       name: 'Smash Burger',
       description: 'Crispy lacy edges, hard griddle sear. 100% halal beef.',
-      price: 8,
+      price: 7,
       category: 'burgers',
       image: '/images/menu-burger-smash.jpg',
       imageAlt: 'Smash burger with crispy caramelized edges on a griddle',
@@ -196,9 +202,22 @@ export const site: SiteConfig = {
     },
     {
       id: 'burger-double',
-      name: 'Double Burger',
+      name: 'Smash Burger Double',
       description: 'Two patties, double the crust. 100% halal beef.',
       price: 10,
+      category: 'burgers',
+      image: '/images/menu-burger-double.jpg',
+      imageAlt: 'Double smash burger stacked with melted cheese',
+      status: 'CONFIRMED',
+    },
+    {
+      id: 'burger-triple',
+      name: 'Smash Burger Triple',
+      description: 'Three patties. 100% halal beef.',
+      // Reuses the double-burger photo — we still only have the one 236x314
+      // burger thumbnail (see CLAUDE.md "Photos"). Alt text describes the photo
+      // that is actually there, not the item name.
+      price: 12,
       category: 'burgers',
       image: '/images/menu-burger-double.jpg',
       imageAlt: 'Double smash burger stacked with melted cheese',
@@ -208,51 +227,94 @@ export const site: SiteConfig = {
       id: 'chicken-sandwich',
       name: 'Chicken Sandwich',
       description: '',
-      price: 7,
+      price: 6,
       category: 'chicken',
       image: '', // no photo yet
       imageAlt: 'Chicken sandwich',
       status: 'CONFIRMED',
     },
     {
-      id: 'chicken-wings',
-      name: 'Chicken Wings',
+      id: 'chicken-wings-bbq',
+      name: 'Chicken Wings BBQ',
       description: '',
       price: 8,
       category: 'chicken',
       image: '',
-      imageAlt: 'Chicken wings',
+      imageAlt: 'BBQ chicken wings',
       status: 'CONFIRMED',
     },
     {
-      id: 'chicken-wings-fries',
-      name: 'Chicken Wings with Fries',
+      id: 'chicken-wings-buffalo',
+      name: 'Chicken Wings Buffalo',
       description: '',
-      price: 11,
+      price: 8,
       category: 'chicken',
       image: '',
-      imageAlt: 'Chicken wings served with fries',
+      imageAlt: 'Buffalo chicken wings',
       status: 'CONFIRMED',
     },
     {
-      id: 'large-fries',
-      name: 'Large Fries',
+      id: 'fries',
+      name: 'Fries',
       description: '',
-      price: 5,
+      price: null,
+      priceLabel: 'Small $3 · Large $5',
       category: 'sides',
       image: '',
-      imageAlt: 'Large portion of fries',
+      imageAlt: 'Portion of fries',
       status: 'CONFIRMED',
     },
     {
-      id: 'add-fries-drink',
-      name: 'Add Fries and Drink',
+      id: 'loaded-burger-fries',
+      name: 'Loaded Burger Fries',
       description: '',
-      price: 5,
+      price: 12,
+      category: 'sides',
+      image: '', // he has a poster shot of this — see CLAUDE.md before adding it
+      imageAlt: 'Fries loaded with smash burger patty, lettuce, tomato, pickles and sauce',
+      status: 'CONFIRMED',
+    },
+    {
+      id: 'mozzarella-sticks',
+      name: 'Mozzarella Sticks',
+      description: '',
+      price: 6,
       category: 'sides',
       image: '',
-      imageAlt: 'Fries and a drink added to any order',
+      imageAlt: 'Fried mozzarella sticks',
       status: 'CONFIRMED',
+    },
+    {
+      id: 'zucchini-sticks',
+      name: 'Zucchini Sticks',
+      description: '',
+      price: 6,
+      category: 'sides',
+      image: '',
+      imageAlt: 'Fried zucchini sticks',
+      status: 'CONFIRMED',
+    },
+    {
+      id: 'soda',
+      name: 'Soda',
+      description: '',
+      price: 2,
+      category: 'drinks',
+      image: '',
+      imageAlt: 'Canned soda',
+      status: 'CONFIRMED',
+    },
+    {
+      id: 'water',
+      name: 'Water',
+      // The board prices water, but the card-acceptance sticker covers the digit
+      // in every photo — only the "$" is visible. Not guessing it.
+      description: '',
+      price: null,
+      category: 'drinks',
+      image: '',
+      imageAlt: 'Bottled water',
+      status: 'UNCONFIRMED',
     },
     // Add new items here as the owner confirms them — components never change.
   ],

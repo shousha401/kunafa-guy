@@ -73,21 +73,36 @@ kunafah-guy-build-spec.md    original build spec — asset manifest + OPEN QUEST
 Built and working: all 8 sections, config-driven, builds clean, no horizontal overflow
 at 320–1440px, one `<h1>`, alt text on every image.
 
-**Menu is real.** On 2026-07-25 the owner sent photos of his own truck. The menu
-board in them is legible, so every price in `site.config.ts` is now transcribed
-from it and marked `CONFIRMED` — no "price TBC" badges render any more:
+**Menu is real, and it changed on 2026-08-08.** The owner sent photos of a *new*
+board in the truck's service window. It replaces the 2026-07-25 board entirely —
+most prices moved, so **never merge the two boards**; the 08-08 one wins. Every
+price below is transcribed from it and marked `CONFIRMED`:
 
 | | |
 |---|---|
-| Kunafah $7 · Trays S $25 / M $45 / L $65 | Smash Burger $8 · Double Burger $10 |
-| Chicken Sandwich $7 · Wings $8 · Wings w/ Fries $11 | Large Fries $5 · Add Fries and Drink $5 |
+| Fresh Kunafah Slice $8 | Smash Burger $7 · Double $10 · Triple $12 |
+| Chicken Sandwich $6 · Wings BBQ $8 · Wings Buffalo $8 | Fries S $3 / L $5 · Loaded Burger Fries $12 |
+| Mozzarella Sticks $6 · Zucchini Sticks $6 | Soda $2 · Water (price obscured on board) |
+
+What moved vs. the July board: kunafah 7→8, smash burger 8→7, chicken sandwich
+7→6. Wings split into BBQ and Buffalo. Gone from the board entirely: kunafah tray
+pricing, Wings w/ Fries $11, Add Fries and Drink $5 — the last two were dropped
+from the config, trays were kept but downgraded (see blocker 7).
+
+Two `price TBC` badges render again as a result: **Kunafah Tray** and **Water**.
 
 Deals confirmed off his pull-up banners: 2 for $10 (single), 2 for $15 (double).
+The 2026-08-08 photos re-confirm the double deal — a hand-lettered sign on the
+truck reads "2 Double Smash Burgers Only $15. 100% Beef Halal". The single-burger
+2-for-$10 sign is not in that set, but nothing contradicts it either.
 Halal is `CONFIRMED` — his banner reads "100% BEEF HALAL", so it's *self-described
 by the owner*, not third-party certified. Word it that way.
 
-**Photos.** `photos-source/` holds the owner's four originals (kept in-repo so the
-pipeline is reproducible); `scripts/process-photos.ps1` crops them into every slot.
+**Photos.** `photos-source/` holds the owner's own originals (kept in-repo so the
+pipeline is reproducible) — the five 2026-07-25 photos the image slots are built from,
+plus the four 2026-08-08 `WhatsApp Image …` files, which are *documentation of the new
+menu board*, not image sources: nothing is cropped from them.
+`scripts/process-photos.ps1` crops the July set into every slot.
 This replaced the earlier stock-looking kunafa shot, so **the licensing risk is gone
 for the hero, menu, Find Us and deal-banner slots.**
 
@@ -102,17 +117,24 @@ for the hero, menu, Find Us and deal-banner slots.**
   Still four macro crops of one baked tray, not actual shred/sear/pull/drench stages —
   alt text says what each crop really shows. Get the licensing question resolved (or a
   real replacement photo) before treating this as launch-ready.
-- Burgers still use the old 236×314 thumbnail — **the one real gap.** Both burger cards
-  show the same double-patty photo; there is no single-patty shot.
-- Chicken and Sides have no photos, so `MenuSection` renders those categories as a
-  clean price list instead of a wall of placeholder tiles (see `hasPhotos` there).
-  Add a photo to any item in a category and it switches to photo cards.
+- Burgers still use the old 236×314 thumbnail — **the one real gap.** All *three*
+  burger cards now show the same double-patty photo; there is no single-patty shot
+  and no triple shot. Alt text on the Triple honestly describes the double.
+- Chicken, Sides and Drinks have no photos, so `MenuSection` renders those categories
+  as a clean price list instead of a wall of placeholder tiles (see `hasPhotos` there).
+  **Adding a photo to any *one* item in a category switches the whole category to photo
+  cards — and every sibling with `image: ''` then renders a broken tile.** Photograph a
+  whole category or none of it.
+- The 2026-08-08 set includes a usable-ish **Loaded Burger Fries** shot, but it's a photo
+  *of a laminated poster behind glass*, with sun glare and the photographer's reflection
+  across it. Left out deliberately — see the whole-category rule above.
 
 ## Launch blockers
 
-Full list is §7 OPEN QUESTIONS in `kunafah-guy-build-spec.md`. His 2026-07-25 photos
-resolved menu/prices, halal, and the deal pricing; photo licensing is resolved for
-every slot except the process section (see below). What's left:
+Full list is §7 OPEN QUESTIONS in `kunafah-guy-build-spec.md`. His photos resolved
+menu/prices (2026-07-25, re-transcribed 2026-08-08), halal, and the deal pricing;
+photo licensing is resolved for every slot except the process section (see below).
+What's left:
 
 1. **"Voted #1 Kunafah in all of California"** — voted by whom? Until
    `claims.votedBestVerified` is `true` *with a source*, it renders as an owner quote,
@@ -125,11 +147,21 @@ every slot except the process section (see below). What's left:
 6. **Process section photo licensing (reopened 2026-08-01)** — the four "How the
    Kunafah Happens" images are back to the pre-truck-photo set at the owner's request;
    see Photos above. Source/license unverified.
+7. **Kunafah tray pricing (reopened 2026-08-08)** — the new board doesn't list trays at
+   all. The old S $25 / M $45 / L $65 came off a board that has since been replaced, and
+   every price on it moved, so those numbers are no longer sourced. The item renders
+   `price TBC` with a "call or text" line. Ask whether he still sells trays and at what
+   price, then restore `priceLabel` in `site.config.ts` and flip it to `CONFIRMED`.
+8. **Water price** — priced on the board, but the card-acceptance sticker covers the
+   digit in every photo. One clear photo of that corner closes it.
 
-Two open questions from the truck photos, **not resolved — ask the owner, don't guess**:
+Open questions from the truck photos, **not resolved — ask the owner, don't guess**:
 
+- **Wings w/ Fries ($11) and Add Fries and Drink ($5) are gone from the 08-08 board.**
+  Both were removed from the config to match it. Confirm they were actually dropped and
+  not just left off when he re-lettered the board.
 - **Shawarma is gone from his board.** It listed Chicken Sandwich instead, so the config
-  now matches the board. Confirm he really dropped shawarma.
+  now matches the board. Confirm he really dropped shawarma. (Still absent on 08-08.)
 - **The truck carries a sign reading "LOCATED AT 208 LORAIN ROAD, NORTH OLMSTED"** —
   that's Ohio. The photo is plainly at the Fresno lot (LifeStyle Furniture is in frame)
   and his banner says 21 E Shaw Ave, so it's probably a leftover from the trailer's
