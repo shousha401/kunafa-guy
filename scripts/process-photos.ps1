@@ -131,7 +131,7 @@ Write-Slot 'hero-kunafa-pull'    $PLATED  0  115 736 981
 
 # Menu cards. The TRAY photo is noticeably sharper than the MACRO one (which
 # is a soft, oversaturated video grab), so it carries most of the slots.
-Write-Slot 'menu-kunafa-classic' $TRAY    0  250 739 370   # 2:1 lifted piece + strands
+Write-Slot 'menu-kunafa-classic' $TRAY    0  650 739 370   # 2:1 tray rim + crust, past the blurriest drip
 Write-Slot 'menu-kunafah-tray'   $TRAY    0  830 739 554   # full tray, for the S/M/L trays
 
 # Process steps - PINNED, do not regenerate from $TRAY. The owner asked to go
