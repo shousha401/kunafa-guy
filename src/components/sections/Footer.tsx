@@ -66,6 +66,18 @@ export function Footer({ business, contact, location, social, halalConfirmed }: 
 
         <p className="text-sm text-cream-100/60">
           © {new Date().getFullYear()} {business.name} · Fresno, CA
+          <span className="block sm:inline">
+            <span className="hidden sm:inline">{' · '}</span>
+            Website by{' '}
+            <a
+              href="https://localfix.now"
+              target="_blank"
+              rel="noopener"
+              className="text-cream-100/80 transition-colors hover:text-kunafa-400"
+            >
+              LocalFix
+            </a>
+          </span>
         </p>
       </div>
     </footer>
